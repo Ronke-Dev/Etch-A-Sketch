@@ -1,0 +1,127 @@
+<body>
+    <div id="wrapper">
+        <h1>Etch-A-Sketch</h1>
+        <button id="button" input type="number">Change Size</button>
+        <div id="grid-container" class="grid-container">   -------------------done
+        </div>
+    </div>
+
+
+    javascript
+
+    const container = document.getElementById("grid-container");  -------------------done
+
+function random(number) {
+    return Math.floor(Math.random() * number + 1);
+}
+
+function makeRows(rows, cols) {                            the function
+    container.style.setProperty("--grid-rows", rows);      the style she appended
+    container.style.setProperty("--grid-cols", cols);      the style she appended
+    for (c = 0; c < (rows * cols); c++) {                   she created a for loop, where i is less that total rows and colunms
+        let cell = document.createElement("div");           she created the new div
+        container.appendChild(cell).className = "grid-item";  added a class name to it, and appended it to the container
+        cell.addEventListener("mouseover", function bgChange() { --instead of text content, we added an event listener. 
+            const rndCol = "rgb(" + random(255) + "," + random(255) + "," + random(255) + ")";
+            cell.style.backgroundColor = rndCol;
+        });
+    };
+};
+
+makeRows(16,16);
+
+const button = document.getElementById("button");
+
+button.addEventListener("click", function changeSize(size) {
+    size = prompt("Enter a value between 0 to 101");
+    container.innerHTML = "";
+    if (0 < size && size <= 100) {
+        makeRows(size, size);
+    } else {
+        makeRows(16, 16);   
+        alert ("Only type values between 1 to 100");
+    }
+});
+
+
+css
+
+*{
+    box-sizing: border-box;
+}
+
+:root{
+    --grid-cols:1;
+    --grid-rows:1;
+    
+}
+
+body{
+    background: cyan;
+}
+
+#wrapper{
+    display: flex;
+    flex-direction: column;  
+    align-items: center;
+    justify-content: center;
+}
+
+#button{
+    margin-bottom: 30px;
+    border-radius: 10px;
+    text-align: center;
+    border-style:solid;
+    cursor: pointer;
+}
+
+.grid-container{
+    display: grid;
+    width: 400px;
+    height: 400px;
+    grid-template-rows: repeat(var(--grid-rows),1fr);
+    grid-template-columns: repeat(var(--grid-cols), 1fr);  
+    background: white;
+    border: 1px solid black;
+}
+
+.grid-item{
+    border: 1px solid black;
+    text-align: center;
+}
+
+@media screen and (max-width: 480px) {
+    #wrapper{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .grid-container{
+        display: grid;
+        width: 300px;
+        height: 300px;
+        grid-template-rows: repeat(var(--grid-rows),1fr);
+        grid-template-columns: repeat(var(--grid-cols), 1fr);  
+        border: 1px solid blue;
+    }
+}
+
+@media screen and (max-height: 420px) {
+    #wrapper{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .grid-container{
+        display: grid;
+        width: 300px;
+        height: 300px;
+        grid-template-rows: repeat(var(--grid-rows),1fr);
+        grid-template-columns: repeat(var(--grid-cols), 1fr);  
+        border: 1px solid blue;
+    }
+}
