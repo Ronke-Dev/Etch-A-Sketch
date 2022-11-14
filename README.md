@@ -68,6 +68,8 @@ Also check out prompts.
 You should be able to enter 64 and have a brand new 64x64 grid pop up without changing the total amount of pixels used.
 
 Notes on Grid//
+
+
 display grid
 grid template columns: 200px  200px   200px splits all the cells into colomns
 grid-template-columns: 1fr 1fr 1fr; we can use the fr unit to flexibly size grid rows and columns. This unit represents one fraction of the available space in the grid container.
